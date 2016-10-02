@@ -74,6 +74,7 @@ var Day = React.createClass({
               <Text style={[styles.dayLabel, textStyle, selectedDayTextColorStyle]}>
                 {this.props.day}
               </Text>
+              <View style={[styles.eventDot, {backgroundColor: this.props.indicators ? this.props.indicators[0] : null}]}/>
             </TouchableOpacity>
           </View>
         </View>
@@ -97,6 +98,18 @@ var Day = React.createClass({
               <Text style={[styles.dayLabel, textStyle]}>
                 {this.props.day}
               </Text>
+              {
+                this.props.indicators ?
+                <View style={styles.eventDotsContainer}>
+                  {
+                    this.props.indicators.map((indicator, index) => 
+                      <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                    )
+                  }
+                </View>
+                :
+                null
+              }
             </TouchableOpacity>
           </View>
         );
@@ -180,6 +193,7 @@ var Days = React.createClass({
         if (slotsAccumulator >= thisMonthFirstDay.getDay()) {
           if (currentDay < getDaysInMonth(month, year)) {
             columns.push(<Day
+                      indicators={this.props.monthIndicators ? (this.props.monthIndicators[currentDay+1] ? this.props.monthIndicators[currentDay+1] : null) : null}
                       key={j}
                       day={currentDay+1}
                       selected={this.state.selectedStates[currentDay]}
@@ -371,7 +385,7 @@ var CalendarPicker = React.createClass({
     minDate: React.PropTypes.instanceOf(Date),
     selectedDate: React.PropTypes.instanceOf(Date).isRequired,
     onDateChange: React.PropTypes.func,
-    screenWidth: React.PropTypes.number,
+    screenWidth: React.PropTypes.number.isRequired,
     startFromMonday: React.PropTypes.bool,
     weekdays: React.PropTypes.array,
     months: React.PropTypes.array,
@@ -462,6 +476,7 @@ var CalendarPicker = React.createClass({
           textStyle={this.props.textStyle} />
 
         <Days
+          monthIndicators={this.props.events ? (this.props.events[this.state.year] ? (this.props.events[this.state.year][this.state.month+1] ? this.props.events[this.state.year][this.state.month+1] : null) : null) : null}
           maxDate={this.props.maxDate}
           minDate={this.props.minDate}
           month={this.state.month}

@@ -118,6 +118,19 @@ function makeStyles(scaler) {
 
     disabledTextColor: {
       color: '#BBBBBB'
+    },
+    eventDotsContainer:{
+      flex: 1,
+      justifyContent: 'center',
+      flexDirection: 'row'
+    },
+    eventDot: {
+      marginLeft: 2,
+      marginRight: 2,
+      borderColor: 'transparent',
+      width: 4,
+      height: 4,
+      borderRadius: 2
     }
   };
 }

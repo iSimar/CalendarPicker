@@ -79,7 +79,7 @@ var styles = StyleSheet.create({
 
   weekRow: {
     flexDirection: 'row'
-  }
+  },
 });
 
 module.exports = styles;
