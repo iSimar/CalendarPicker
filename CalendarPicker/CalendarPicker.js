@@ -66,17 +66,26 @@ var Day = React.createClass({
       var selectedDayColorStyle = this.props.selectedDayColor ? {backgroundColor: this.props.selectedDayColor} : {};
       var selectedDayTextColorStyle = this.props.selectedDayTextColor ? {color: this.props.selectedDayTextColor} : {};
       return (
-        <View style={styles.dayWrapper}>
-          <View style={[styles.dayButtonSelected, selectedDayColorStyle]}>
-            <TouchableOpacity
-              style={styles.dayButton}
-              onPress={() => this.props.onDayChange(this.props.day) }>
-              <Text style={[styles.dayLabel, textStyle, selectedDayTextColorStyle]}>
-                {this.props.day}
-              </Text>
-              <View style={[styles.eventDot, {backgroundColor: this.props.indicators ? this.props.indicators[0] : null}]}/>
-            </TouchableOpacity>
-          </View>
+        <View style={[styles.dayWrapper, {borderColor: '#e63d5d'}]}>
+          <TouchableOpacity
+            style={styles.dayButton}
+            onPress={() => this.props.onDayChange(this.props.day) }>
+            <Text style={[styles.dayLabel, textStyle, selectedDayTextColorStyle]}>
+              {this.props.day}
+            </Text>
+            {
+              this.props.indicators ?
+              <View style={styles.eventDotsContainer}>
+                {
+                  this.props.indicators.map((indicator, index) => 
+                    <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                  )
+                }
+              </View>
+              :
+              null
+            }
+          </TouchableOpacity>
         </View>
       );
     } else {
@@ -86,6 +95,18 @@ var Day = React.createClass({
             <Text style={[styles.dayLabel, textStyle, styles.disabledTextColor]}>
               {this.props.day}
             </Text>
+            {
+              this.props.indicators ?
+              <View style={styles.eventDotsContainer}>
+                {
+                  this.props.indicators.map((indicator, index) => 
+                    <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                  )
+                }
+              </View>
+              :
+              null
+            }
           </View>
         );
       } 
