@@ -16,7 +16,7 @@ function makeStyles(scaler) {
       width: 50*scaler,
       height: 35*scaler,
       backgroundColor: 'rgba(0,0,0,0.0)',
-      borderWidth: 1,
+      borderWidth: 2,
       borderColor: 'transparent'
     },
 
@@ -35,7 +35,7 @@ function makeStyles(scaler) {
     },
 
     dayLabel: {
-      fontSize: 14*scaler,
+      fontSize: 16,
       color: '#000',
       marginTop: 6*scaler,
       alignSelf: 'center'
@@ -59,7 +59,7 @@ function makeStyles(scaler) {
 
     dayLabels: {
       width: 50*scaler,
-      fontSize: 13*scaler,
+      fontSize: 16,
       color: '#000',
       textAlign: 'center'
     },
@@ -95,14 +95,14 @@ function makeStyles(scaler) {
 
     prev: {
       textAlign: 'left',
-      fontSize: 14*scaler,
-      color: '#e63d5d',
+      fontSize: 16,
+      color: '#990033',
     },
 
     next: {
       textAlign: 'right',
-      fontSize: 14*scaler,
-      color: '#e63d5d',
+      fontSize: 16,
+      color: '#990033',
     },
 
     yearLabel: {
