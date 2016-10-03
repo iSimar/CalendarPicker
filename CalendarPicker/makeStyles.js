@@ -73,7 +73,7 @@ function makeStyles(scaler) {
     },
 
     monthLabel: {
-      fontSize: 16*scaler,
+      fontSize: 16,
       color: '#000',
       width: 180*scaler,
       textAlign: 'center'
