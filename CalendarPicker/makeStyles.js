@@ -15,7 +15,6 @@ function makeStyles(scaler) {
     dayWrapper: {
       width: 50,
       height: 35,
-      backgroundColor: 'rgba(0,0,0,0.0)',
       borderWidth: 2,
       borderColor: 'transparent',
       justifyContent: 'center',
@@ -26,11 +25,11 @@ function makeStyles(scaler) {
       width: 50,
       height: 40,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+
     },
 
     dayButtonSelected: {
-      backgroundColor: '#5ce600',
       justifyContent: 'center',
       alignItems: 'center'
     },
@@ -126,7 +125,6 @@ function makeStyles(scaler) {
       color: '#BBBBBB'
     },
     eventDotsContainer:{
-      flex: 1,
       justifyContent: 'center',
       flexDirection: 'row'
     },
