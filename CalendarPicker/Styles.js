@@ -13,7 +13,6 @@ var styles = StyleSheet.create({
     marginTop: 10
   },
   dayWrapper: {
-    backgroundColor: 'rgba(0,0,0,0.0)',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -21,13 +20,15 @@ var styles = StyleSheet.create({
   dayButton: {
     flex: 1,
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignItems: 'center',
+    paddingTop: 2,
+    paddingBottom: 2
   },
 
   dayLabel: {
     fontSize: 14,
     color: '#000',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
 
   dayLabelsWrapper: {
@@ -38,7 +39,6 @@ var styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     alignSelf: 'center',
-    backgroundColor: 'rgba(0,0,0,0.0)',
     borderColor: 'rgba(0,0,0,0.2)'
   },
 
