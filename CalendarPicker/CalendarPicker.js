@@ -12,7 +12,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 var {
@@ -63,30 +64,28 @@ var Day = React.createClass({
   render() {
     var textStyle = this.props.textStyle;
     if (this.props.selected) {
-      var selectedDayColorStyle = this.props.selectedDayColor ? {backgroundColor: this.props.selectedDayColor} : {};
-      var selectedDayTextColorStyle = this.props.selectedDayTextColor ? {color: this.props.selectedDayTextColor} : {};
       return (
-        <View style={[styles.dayWrapper, {borderColor: '#e63d5d'}]}>
-          <TouchableOpacity
+        <View style={[styles.dayWrapper, {borderColor: '#A82B51'}]}>
+            <TouchableOpacity
             style={styles.dayButton}
             onPress={() => this.props.onDayChange(this.props.day) }>
-            <Text style={[styles.dayLabel, textStyle, selectedDayTextColorStyle]}>
-              {this.props.day}
-            </Text>
-            {
-              this.props.indicators ?
-              <View style={styles.eventDotsContainer}>
-                {
-                  this.props.indicators.map((indicator, index) => 
-                    <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
-                  )
-                }
-              </View>
-              :
-              null
-            }
-          </TouchableOpacity>
-        </View>
+              <Text style={[styles.dayLabel, textStyle]}>
+                {this.props.day}
+              </Text>
+              {
+                this.props.indicators ?
+                <View style={styles.eventDotsContainer}>
+                  {
+                    this.props.indicators.map((indicator, index) => 
+                      <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                    )
+                  }
+                </View>
+                :
+                null
+              }
+            </TouchableOpacity>
+          </View>
       );
     } else {
       if (this.props.date < this.props.minDate || this.props.date > this.props.maxDate) {
