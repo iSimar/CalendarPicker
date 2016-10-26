@@ -13,41 +13,43 @@ function makeStyles(scaler) {
       marginTop: 10*scaler
     },
     dayWrapper: {
-      width: 50*scaler,
-      height: 35*scaler,
+      width: 50,
+      height: 35,
       backgroundColor: 'rgba(0,0,0,0.0)',
       borderWidth: 2,
-      borderColor: 'transparent'
+      borderColor: 'transparent',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
 
     dayButton: {
-      width: 50*scaler,
-      height: 40*scaler,
-      alignSelf: 'center'
+      width: 50,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center'
     },
 
     dayButtonSelected: {
-      width: 30*scaler,
-      height: 30*scaler,
-      borderRadius: 15*scaler,
       backgroundColor: '#5ce600',
-      alignSelf: 'center'
+      justifyContent: 'center',
+      alignItems: 'center'
     },
 
     dayLabel: {
       fontSize: 16,
       color: '#000',
-      marginTop: 6*scaler,
-      alignSelf: 'center'
+      // marginTop: 6*scaler/,
+      justifyContent: 'center',
+      alignItems: 'center'
     },
 
     dayLabelsWrapper: {
       flexDirection: 'row',
-      marginBottom: 10*scaler,
+      marginBottom: 10,
       borderBottomWidth: 1,
       borderTopWidth: 1,
-      paddingTop: 10*scaler,
-      paddingBottom: 10*scaler,
+      paddingTop: 10,
+      paddingBottom: 10,
       alignSelf: 'center',
       backgroundColor: 'rgba(0,0,0,0.0)',
       borderColor: 'rgba(0,0,0,0.2)'
