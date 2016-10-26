@@ -13,7 +13,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Platform
+  Platform,
+  ActivityIndicator 
 } from 'react-native';
 
 var {
@@ -65,10 +66,28 @@ var Day = React.createClass({
     var textStyle = this.props.textStyle;
     if (this.props.selected) {
       return (
-        <View style={[styles.dayWrapper, {borderColor: '#A82B51'}]}>
+        <View style={[styles.dayWrapper, {borderColor: '#A82B51', backgroundColor: '#f8f8f8'}]}>
             <TouchableOpacity
             style={styles.dayButton}
             onPress={() => this.props.onDayChange(this.props.day) }>
+              {
+                this.props.indicators ?
+                <View style={styles.eventDotsContainer}>
+                  {
+                    this.props.indicators.map((indicator, index) => {
+                      if(index == 0 || index == 1 || index == 2){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
+                    )
+                  }
+                </View>
+                :
+                null
+              }
               <Text style={[styles.dayLabel, textStyle]}>
                 {this.props.day}
               </Text>
@@ -76,8 +95,14 @@ var Day = React.createClass({
                 this.props.indicators ?
                 <View style={styles.eventDotsContainer}>
                   {
-                    this.props.indicators.map((indicator, index) => 
-                      <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                    this.props.indicators.map((indicator, index) => {
+                      if(index == 3 || index == 4 || index == 5){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
                     )
                   }
                 </View>
@@ -91,6 +116,24 @@ var Day = React.createClass({
       if (this.props.date < this.props.minDate || this.props.date > this.props.maxDate) {
         return (
           <View style={styles.dayWrapper}>
+            {
+              this.props.indicators ?
+              <View style={styles.eventDotsContainer}>
+                {
+                  this.props.indicators.map((indicator, index) => {
+                      if(index == 0 || index == 1 || index == 2){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
+                  )
+                }
+              </View>
+              :
+              null
+            }
             <Text style={[styles.dayLabel, textStyle, styles.disabledTextColor]}>
               {this.props.day}
             </Text>
@@ -98,8 +141,14 @@ var Day = React.createClass({
               this.props.indicators ?
               <View style={styles.eventDotsContainer}>
                 {
-                  this.props.indicators.map((indicator, index) => 
-                    <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                  this.props.indicators.map((indicator, index) => {
+                      if(index == 3 || index == 4 || index == 5){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
                   )
                 }
               </View>
@@ -115,6 +164,24 @@ var Day = React.createClass({
             <TouchableOpacity
             style={styles.dayButton}
             onPress={() => this.props.onDayChange(this.props.day) }>
+              {
+                this.props.indicators ?
+                <View style={styles.eventDotsContainer}>
+                  {
+                    this.props.indicators.map((indicator, index) => {
+                      if(index == 0 || index == 1 || index == 2){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
+                    )
+                  }
+                </View>
+                :
+                null
+              }
               <Text style={[styles.dayLabel, textStyle]}>
                 {this.props.day}
               </Text>
@@ -122,8 +189,14 @@ var Day = React.createClass({
                 this.props.indicators ?
                 <View style={styles.eventDotsContainer}>
                   {
-                    this.props.indicators.map((indicator, index) => 
-                      <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                    this.props.indicators.map((indicator, index) => {
+                      if(index == 3 || index == 4 || index == 5){
+                        return(
+                          <View key={index} style={[styles.eventDot, {backgroundColor: indicator}]}/>
+                        );
+                      }
+                      return(null);
+                      }
                     )
                   }
                 </View>
@@ -430,7 +503,9 @@ var CalendarPicker = React.createClass({
       day: this.props.selectedDate.getDate(),
       month: this.props.selectedDate.getMonth(),
       year: this.props.selectedDate.getFullYear(),
-      selectedDay: []
+      selectedDay: [],
+      loading: false,
+      currentMonthIndicators: this.props.currentMonthIndicators
     };
   },
 
@@ -451,7 +526,9 @@ var CalendarPicker = React.createClass({
   },
 
   onMonthChange(month) {
-    this.setState({month: month}, () => { this.onDateChange(); });
+    this.setState({month: month, loading: true}, () => { this.onDateChange(); this.props.onMonthChange(month, (currentMonthIndicators)=>{
+      this.setState({loading: false, currentMonthIndicators});
+    })});
   },
 
   getNextYear(){
@@ -475,6 +552,18 @@ var CalendarPicker = React.createClass({
   },
 
   render() {
+    if(this.state.loading){
+      return(
+        <View style={{
+            marginTop: 130,
+            marginBottom: 130,
+        }}>
+          <ActivityIndicator
+              size="large"
+              color="#990033"
+            />
+        </View>);
+    }
     return (
       <View style={styles.calendar}>
         <HeaderControls
@@ -496,7 +585,7 @@ var CalendarPicker = React.createClass({
           textStyle={this.props.textStyle} />
 
         <Days
-          monthIndicators={this.props.events ? (this.props.events[this.state.year] ? (this.props.events[this.state.year][this.state.month+1] ? this.props.events[this.state.year][this.state.month+1] : null) : null) : null}
+          monthIndicators={this.state.currentMonthIndicators ? this.state.currentMonthIndicators : null}
           maxDate={this.props.maxDate}
           minDate={this.props.minDate}
           month={this.state.month}
