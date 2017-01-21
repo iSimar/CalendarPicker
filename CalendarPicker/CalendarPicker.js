@@ -375,13 +375,13 @@ var HeaderControls = React.createClass({
         // Run this function as a callback to ensure state is set first
         () => {
           this.props.getNextYear();
-          this.props.onMonthChange(this.state.selectedMonth);
+          this.props.onMonthChange(this.state.selectedMonth, this.props.year+1);
         }
       );
     } else {
       this.setState({ selectedMonth: next },
         () => {
-          this.props.onMonthChange(this.state.selectedMonth);
+          this.props.onMonthChange(this.state.selectedMonth, this.props.year);
         }
       );
     }
@@ -394,13 +394,13 @@ var HeaderControls = React.createClass({
         // Run this function as a callback to ensure state is set first
         () => {
           this.props.getPrevYear();
-          this.props.onMonthChange(this.state.selectedMonth);
+          this.props.onMonthChange(this.state.selectedMonth, this.props.year-1);
         }
       );
     } else {
       this.setState({ selectedMonth: prev },
         () => {
-          this.props.onMonthChange(this.state.selectedMonth);
+          this.props.onMonthChange(this.state.selectedMonth, this.props.year);
         }
       );
     }
@@ -525,8 +525,8 @@ var CalendarPicker = React.createClass({
     this.setState({day: day.day}, () => { this.onDateChange(); });
   },
 
-  onMonthChange(month) {
-    this.setState({month: month, loading: true}, () => { this.onDateChange(); this.props.onMonthChange(month, (currentMonthIndicators)=>{
+  onMonthChange(month, year) {
+    this.setState({month: month, loading: true}, () => { this.onDateChange(); this.props.onMonthChange(month, year, (currentMonthIndicators)=>{
       this.setState({loading: false, currentMonthIndicators});
     })});
   },
